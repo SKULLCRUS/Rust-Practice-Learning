@@ -75,8 +75,8 @@ use rand::Rng;
 
 // Used for working with files
 // You could also use nested paths like this
-use std::io::{Write, BufReader, BufRead, ErrorKind};
 use std::fs::File;
+use std::io::{BufRead, BufReader, ErrorKind, Write};
 
 // Ordering compares values
 use std::cmp::Ordering;
@@ -95,13 +95,13 @@ use crate::restaurant::order_food;
 
 // ----- FUNCTIONS -----
 // You can define functions before or after main
-fn say_hello(){
+fn say_hello() {
     println!("Hello");
 }
 
 // You can pass arguments to functions
-fn get_sum(x: i32, y: i32){
-    println!("{} + {} = {}", x, y, x+y);
+fn get_sum(x: i32, y: i32) {
+    println!("{} + {} = {}", x, y, x + y);
 }
 
 // Return a value
@@ -118,20 +118,20 @@ fn get_sum_3(x: i32, y: i32) -> i32 {
 }
 
 // Return multiple values
-fn get_2(x: i32) -> (i32, i32){
-    return (x+1, x+2);
+fn get_2(x: i32) -> (i32, i32) {
+    return (x + 1, x + 2);
 }
 
-fn print_str(x: String){
+fn print_str(x: String) {
     println!("A string {}", x);
 }
 
-fn print_return_str(x: String) -> String{
+fn print_return_str(x: String) -> String {
     println!("A string {}", x);
     x
 }
 
-fn change_string(name: &mut String){
+fn change_string(name: &mut String) {
     name.push_str(" is Happy");
     println!("Message : {}", name);
 }
@@ -139,7 +139,7 @@ fn change_string(name: &mut String){
 // This function sums values in a list (Receives reference to list)
 fn sum_list(list: &[i32]) -> i32 {
     let mut sum = 0;
-    for &val in list.iter(){
+    for &val in list.iter() {
         sum += &val;
     }
     sum
@@ -154,7 +154,7 @@ fn sum_list(list: &[i32]) -> i32 {
 use std::ops::Add;
 
 // We get 2 generic types of the same type and return that same type
-fn get_sum_gen<T:Add<Output = T>>(x: T, y: T) -> T {
+fn get_sum_gen<T: Add<Output = T>>(x: T, y: T) -> T {
     return x + y;
 }
 
@@ -194,7 +194,8 @@ fn main() {
     Result has an expect function that returns any error that occurred
     (We should handle this error, but we'll cover that later)
     */
-    io::stdin().read_line(&mut name)
+    io::stdin()
+        .read_line(&mut name)
         .expect("Didn't Receive Input");
 
     // Were you have {} your variable values will be placed
@@ -216,8 +217,7 @@ fn main() {
     // Trim eliminates white space and parse converts the string into an int
     // We expect age to have an integer value and expect will throw an
     // error if this isn't true (We'll get more into error handling later)
-    let mut age: u32 = age.trim().parse()
-        .expect("Age wasn't assigned a number");
+    let mut age: u32 = age.trim().parse().expect("Age wasn't assigned a number");
     age = age + 1;
 
     println!("I'm {} and I want ${}", age, ONE_MIL);
@@ -274,9 +274,9 @@ fn main() {
     // ----- IF EXPRESSIONS -----
     let age = 8;
 
-    if (age >= 1) && (age <= 18){
+    if (age >= 1) && (age <= 18) {
         println!("Important Birthday");
-    } else if (age == 21) || (age == 50){
+    } else if (age == 21) || (age == 50) {
         println!("Important Birthday");
     } else if age >= 65 {
         println!("Important Birthday");
@@ -286,11 +286,7 @@ fn main() {
 
     // ----- TERNARY OPERATOR -----
     let mut my_age = 47;
-    let can_vote = if my_age >= 18 {
-        true
-    } else {
-        false
-    };
+    let can_vote = if my_age >= 18 { true } else { false };
     println!("Can Vote : {}", can_vote);
 
     // ----- MATCH -----
@@ -301,7 +297,7 @@ fn main() {
     // You can do what we did with if
     let age2 = 8;
     match age2 {
-        1..=18 => println!("Important Birthday"), // 1 through 18
+        1..=18 => println!("Important Birthday"),  // 1 through 18
         21 | 50 => println!("Important Birthday"), // 21 or 50
         65..=i32::MAX => println!("Important Birthday"), // > 65
         _ => println!("Not an Important Birthday"), // Default
@@ -320,7 +316,7 @@ fn main() {
     // ----- ARRAYS -----
     // Elements in an array must be of the same type
     // and have a fixed size
-    let arr_1 = [1,2,3,4];
+    let arr_1 = [1, 2, 3, 4];
 
     // Get value by index starting at 0
     println!("1st : {}", arr_1[0]);
@@ -330,7 +326,7 @@ fn main() {
 
     // ----- LOOP -----
     // Create an infinite loop that ends when break is called
-    let arr_2 = [1,2,3,4,5,6,7,8,9];
+    let arr_2 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let mut loop_idx = 0;
     loop {
         if arr_2[loop_idx] % 2 == 0 {
@@ -349,7 +345,7 @@ fn main() {
     // ----- WHILE LOOP -----
     // Looping based on a condition
     loop_idx = 0;
-    while loop_idx < arr_2.len(){
+    while loop_idx < arr_2.len() {
         println!("Arr : {}", arr_2[loop_idx]);
         loop_idx += 1;
     }
@@ -468,7 +464,7 @@ fn main() {
         Thursday,
         Friday,
         Saturday,
-        Sunday
+        Sunday,
     }
 
     // Define function for Day enum
@@ -476,13 +472,13 @@ fn main() {
         fn is_weekend(&self) -> bool {
             match self {
                 Day::Saturday | Day::Sunday => true,
-                _ => false
+                _ => false,
             }
         }
     }
 
     // Use enum to store todays day
-    let today:Day = Day::Monday;
+    let today: Day = Day::Monday;
 
     // Perform different actions based on day
     match today {
@@ -537,7 +533,7 @@ fn main() {
     // Remove and return the last value
     println!("Pop {:?}", vec2.pop());
 
-// START HERE
+    // START HERE
 
     // ----- FUNCTIONS -----
     say_hello();
@@ -549,7 +545,7 @@ fn main() {
     let (val_1, val_2) = get_2(3);
     println!("Nums : {} {}", val_1, val_2);
 
-    let num_list = vec![1,2,3,4,5];
+    let num_list = vec![1, 2, 3, 4, 5];
     println!("Sum of list = {}", sum_list(&num_list));
 
     // ----- GENERIC TYPES -----
@@ -557,8 +553,8 @@ fn main() {
     // It is mainly used when we want to create functions that can work with
     // multiple data types. It is used with structs, enums, traits, etc.
     // which we'll talk about later
-    println!("5 + 4 = {}", get_sum_gen(5,4));
-    println!("5.2 + 4.6 = {}", get_sum_gen(5.2,4.6));
+    println!("5 + 4 = {}", get_sum_gen(5, 4));
+    println!("5.2 + 4.6 = {}", get_sum_gen(5.2, 4.6));
 
     // ----- OWNERSHIP -----
     // Memory is managed through a system of ownership with
@@ -632,7 +628,7 @@ fn main() {
     heroes.insert("The Flash", "Barry Allen");
 
     // Iterate over hashmap
-    for(k, v) in heroes.iter(){
+    for (k, v) in heroes.iter() {
         println!("{} = {}", k, v);
     }
 
@@ -640,7 +636,7 @@ fn main() {
     println!("Length : {}", heroes.len());
 
     // Check for key in hashmap
-    if heroes.contains_key(&"Batman"){
+    if heroes.contains_key(&"Batman") {
         // Get value with key
         let the_batman = heroes.get(&"Batman");
         match the_batman {
@@ -652,7 +648,7 @@ fn main() {
     // ----- STRUCTS -----
     // A struct is a custom data type that stores multiple
     // types of data
-    struct Customer{
+    struct Customer {
         name: String,
         address: String,
         balance: f32,
@@ -662,7 +658,7 @@ fn main() {
     let mut bob = Customer {
         name: String::from("Bob Smith"),
         address: String::from("555 Main St"),
-        balance: 234.50
+        balance: 234.50,
     };
 
     // Change a value
@@ -692,30 +688,36 @@ fn main() {
     }
 
     // Define rectangle and circle struct
-    struct Rectangle {length: f32, width: f32}
-    struct Circle {length: f32, width: f32}
+    struct Rectangle {
+        length: f32,
+        width: f32,
+    }
+    struct Circle {
+        length: f32,
+        width: f32,
+    }
 
     // Implement the trait for rectangle
-    impl Shape for Rectangle{
+    impl Shape for Rectangle {
         // Constructor
         fn new(length: f32, width: f32) -> Rectangle {
-            return Rectangle{length, width};
+            return Rectangle { length, width };
         }
 
         // self allows us to refer to parameters for this struct
-        fn area(&self) -> f32{
+        fn area(&self) -> f32 {
             return self.length * self.width;
         }
     }
 
     // Implement the trait for circle
-    impl Shape for Circle{
+    impl Shape for Circle {
         // Constructor
         fn new(length: f32, width: f32) -> Circle {
-            return Circle{length, width};
+            return Circle { length, width };
         }
 
-        fn area(&self) -> f32{
+        fn area(&self) -> f32 {
             return (self.length / 2.0).powf(2.0) * PI;
         }
     }
@@ -819,7 +821,7 @@ fn main() {
     // arrays, vectors, maps, etc.
     // An iterator cycles through values by borrowing, so the collection
     // is not moved (You can't change values)
-    let mut arr_it = [1,2,3,4];
+    let mut arr_it = [1, 2, 3, 4];
     for val in arr_it.iter() {
         println!("{}", val);
     }
@@ -839,9 +841,7 @@ fn main() {
     // let var_name = |parameters| -> return_type {BODY}
 
     // Create a closure that defines if someone can vote
-    let can_vote = |age: i32| {
-        age >= 18
-    };
+    let can_vote = |age: i32| age >= 18;
     println!("Can vote : {}", can_vote(8));
 
     // Closures can access variables outside of its body with borrowing
@@ -858,7 +858,10 @@ fn main() {
     println!("samp1 = {}", samp1);
 
     // You can pass closures to functions
-    fn use_func<T>(a: i32, b: i32, func: T) -> i32 where T: Fn(i32, i32) -> i32 {
+    fn use_func<T>(a: i32, b: i32, func: T) -> i32
+    where
+        T: Fn(i32, i32) -> i32,
+    {
         func(a, b)
     }
 
@@ -949,9 +952,8 @@ fn main() {
 
     // Create the root node with left and right
     let node1 = TreeNode::new(1)
-    .left(TreeNode::new(2))
-    .right(TreeNode::new(3));
-
+        .left(TreeNode::new(2))
+        .right(TreeNode::new(3));
 
     // Used to test original
     // let mut boss = TreeNode {
@@ -1018,7 +1020,7 @@ fn main() {
 
     // Bank struct just contains current balance
     pub struct Bank {
-        balance: f32
+        balance: f32,
     }
 
     // Allows for withdrawing money
@@ -1026,7 +1028,6 @@ fn main() {
     // fn withdraw(the_bank: &mut Bank, amt: f32) {
     //         the_bank.balance -= amt;
     //     }
-
 
     // Create bank struct
     // let mut bank = Bank{balance: 100.00};
@@ -1050,22 +1051,26 @@ fn main() {
     // The fix that allows multiple owners and blocks access when needed
     // A smart pointer Rc<RefCell<T>> allows multiple owners with mutable
     // access to the same data
-    use std::rc::Rc;
     use std::cell::RefCell;
+    use std::rc::Rc;
     // Arc<T> provides shared ownership of a value
     // Mutex blocks threads waiting for lock to be available
     use std::sync::{Arc, Mutex};
 
-    fn withdraw(the_bank: &Arc<Mutex<Bank>>, amt:f32){
+    fn withdraw(the_bank: &Arc<Mutex<Bank>>, amt: f32) {
         let mut bank_ref = the_bank.lock().unwrap();
 
-        if bank_ref.balance < 5.00{
-            println!("Current Balance : {} Withdrawal a smaller amount",
-            bank_ref.balance);
+        if bank_ref.balance < 5.00 {
+            println!(
+                "Current Balance : {} Withdrawal a smaller amount",
+                bank_ref.balance
+            );
         } else {
             bank_ref.balance -= amt;
-            println!("Customer withdrew {} Current Balance {}",
-            amt, bank_ref.balance);
+            println!(
+                "Customer withdrew {} Current Balance {}",
+                amt, bank_ref.balance
+            );
         }
     }
 
@@ -1073,17 +1078,13 @@ fn main() {
         withdraw(&the_bank, 5.00);
     }
 
-    let bank: Arc<Mutex<Bank>> =
-      Arc::new(Mutex::new(Bank { balance: 20.00 }));
+    let bank: Arc<Mutex<Bank>> = Arc::new(Mutex::new(Bank { balance: 20.00 }));
 
     // Creates 10 customer threads
     let handles = (0..10).map(|_| {
-
         // Clone duplicates an the bank object
         let bank_ref = bank.clone();
-        thread::spawn(|| {
-            customer(bank_ref)
-        })
+        thread::spawn(|| customer(bank_ref))
     });
 
     // Wait for all customers to finish
@@ -1091,10 +1092,9 @@ fn main() {
         handle.join().unwrap();
     }
 
-  println!("Total: {}", bank.lock().unwrap().balance);
+    println!("Total: {}", bank.lock().unwrap().balance);
 
     // ----- INSTALLATION ------
     // Install rustup on Mac or Linux
     // curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
-
 }
